@@ -18,11 +18,57 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const axios = require('axios');
+const { conn, Country} = require('./src/db.js');
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-  });
+
+
+async function fetchAndSaveCountries() {
+  try {
+    const response = await axios.get('https://restcountries.com/v3.1/all');
+    const countries = response.data;
+
+    // Filtrar y transformar los datos de la API
+    const filteredCountries = countries.map(country => {
+      return {
+        name: country.name.common,
+        id: country.cca3,
+        flags: country.flags ? country.flags.svg : null,
+        continents: country.region,
+        capital: country.capital ? country.capital[0] : 'N/A',
+        area: country.area,
+        population: country.population
+      };
+    });
+
+    // Sincronizar el modelo Country con la base de datos
+    await Country.sync();
+
+    // Guardar los países en la base de datos
+    await Country.bulkCreate(filteredCountries);
+
+    console.log('Los países se han guardado correctamente en la base de datos.');
+  } catch (error) {
+    console.error('Ocurrió un error al obtener o guardar los países:', error);
+  }
+}
+// mandar la funcion al controller
+conn.sync({ alter: true }).then(() => {
+  fetchAndSaveCountries()
+    .then(() => {
+      server.listen(3001, () => {
+        console.log('%s listening at 3001');
+      });
+    })
+    .catch(error => {
+      console.error('Ocurrió un error al iniciar el servidor:', error);
+    });
 });
+
+// // Syncing all the models at once.
+// conn.sync({ force: true }).then(() => {
+  
+//   server.listen(3001, () => {
+//     console.log('%s listening at 3001'); // eslint-disable-line no-console
+//   });
+// });
