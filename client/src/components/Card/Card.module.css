@@ -1,0 +1,13 @@
+.card{
+    border:1px solid black;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+}
+.divCards{
+  display: inline-block;
+  background-color:palevioletred;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 25px 0px;
+} 
