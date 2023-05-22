@@ -1,0 +1,39 @@
+.countrydetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .countryid {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .countryname {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .activities {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .countryflag {
+    max-width: 200px;
+    margin-bottom: 10px;
+  }
+  
+  .countryinfo {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .countryinfo span {
+    font-weight: bold;
+  }

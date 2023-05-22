@@ -1,13 +1,49 @@
-.card{
+.card {
+  width: 300px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cardimg {
+  width: 90%;
+  height: auto;
+  object-fit: cover; 
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+}
+
+.cardh2 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+.card .label {
+  font-weight: bold;
+}
+
+.card .info {
+  margin-left: 10px;
+}
+
+
+/* .card{
     border:1px solid black;
     width: fit-content;
     height: fit-content;
     border-radius: 10px;
-}
+}*/
 .divCards{
   display: inline-block;
   background-color:palevioletred;
   border-radius: 10px;
   overflow: hidden;
   margin: 25px 0px;
-} 
+}

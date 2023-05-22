@@ -10,16 +10,21 @@ export default function SearchBar(props) {
     };
     const handleButtonClick = async () => {
         try {
-            const results = await props.onSearch(countries);
-            props.setCountries(results);
-        } catch (error) {
-            return ({ error: error.message })
-        }
+            await props.onSearch(countries);
+          } catch (error) {
+            console.error(error);
+          }
+        // try {
+        //     const results = await props.onSearch(countries);
+        //     props.setCountries(results);
+        // } catch (error) {
+        //     return ({ error: error.message })
+        // }
     };
     return (
         <div>
             <input type="search" onChange={handleSearch} placeholder="Search for a Country..." />
-            <button onClick={()=> props.onSearch(countries)}>Search</button>
+            <button onClick={handleButtonClick}>Search</button>
             {/* <button onClick={() => props.onSearch(vgs)}>Search</button> */}
         </div>
     );

@@ -34,7 +34,7 @@ async function fetchAndSaveCountries() {
         name: country.name.common,
         id: country.cca3,
         flags: country.flags ? country.flags.svg : null,
-        continents: country.continents,
+        continents: country.region,
         capital: country.capital ? country.capital[0] : 'N/A',
         area: country.area,
         population: country.population
@@ -53,7 +53,7 @@ async function fetchAndSaveCountries() {
   }
 }
 // mandar la funcion al controller
-conn.sync({ alter: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   fetchAndSaveCountries()
     .then(() => {
       server.listen(3001, () => {

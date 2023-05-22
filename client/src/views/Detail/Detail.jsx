@@ -1,81 +1,88 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import React from "react";
-
+import style from "./Detail.module.css";
+import { getCountry } from "../../redux/actions.js";
+import axios from "axios";
 
 export default function Detail() {
-
     const { idPais } = useParams();
-    const [countries, setCountries] = useState({
-        id: '',
-        name: '',
-        flags: '',
-        continents: '',
-        capital: '',
-        area: '',
-        population: '',
+    const dispatch = useDispatch();
 
-    })
-    // const navigate = useNavigate();
+    const country = useSelector((state) => state.country);
 
     useEffect(() => {
-        fetch(`http://localhost:3001/countries/${idPais}`)
-            .then((response) => response.json())
-            .then((country) => {
-                if (country.id) {
-                    setCountries({
-                        id:country.id,
-                        name: country.name,
-                        flags: country.flags,
-                        continents: country.continents,
-                        capital: country.capital,
-                        area: country.area,
-                        population: country.population
-                    });
-                } else {
-                    alert("No hay Pais con ese ID");
-                }
-            })
-            .catch((err) => {
-                alert("ERROR "+ err.message);
-            });
-    }, [idPais]);
+        dispatch(getCountry(idPais));
+    }, [dispatch, idPais]);
+
     return (
         <div>
-            <div >
-                <div >
-                    {countries.id && (<p>
-                        <b >ID: </b>
-                        {countries.id}
-                    </p>)}
-                    {countries.name && (<p>
-                        <b >Name: </b>
-                        {countries.name}
-                    </p>)}
-                    
-                    {countries.continents && (<p>
-                        <b >Continents: </b>
-                        {countries.continents}
-                    </p>)}
-                    {countries.capital && (<p>
-                        <b >Capital: </b>
-                        {countries.capital}
-                    </p>)}
-                    {countries.area && (<p>
-                        <b >Area: </b>
-                        {countries.area}
-                    </p>)}
-                    {countries.population && (<p>
-                        <b >Population: </b>
-                        {countries.population}
-                        
-                    </p>)}
-                   
+            <div className={style.countrydetail}>
+                <div className={style.countryinfo}>
+                    {country.id && (
+                        <p className={style.countryid}>
+                            <b>ID: </b>
+                            {country.id}
+                        </p>
+                    )}
+                    {country.name && (
+                        <p className={style.countryname}>
+                            <b>Nombre: </b>
+                            {country.name}
+                        </p>
+                    )}
+                    {country.continents && (
+                        <p>
+                            <b>Continente: </b>
+                            {country.continents}
+                        </p>
+                    )}
+                    {country.capital && (
+                        <p>
+                            <b>Capital: </b>
+                            {country.capital}
+                        </p>
+                    )}
+                    {country.area && (
+                        <p>
+                            <b>Area: </b>
+                            {country.area}
+                        </p>
+                    )}
+                    {country.population && (
+                        <p>
+                            <b>Populacion: </b>
+                            {country.population}
+                        </p>
+                    )}
                 </div>
-                <img src={countries.flags} />
+                <img className={style.countryflag} src={country.flags} alt="Country Flag" />
+                {country.Activities && country.Activities.length > 0 && (
+                    <div className={style.activities}>
+                        <h3>Actividades:</h3>
+                        <ul>
+                            {country.Activities.map((activity) => (
+                                <li key={activity.id}>
+                                    <p>
+                                        <b>Nombre: </b>
+                                        {activity.name}
+                                    </p>
+                                    <p>
+                                        <b>Dificultad: </b>
+                                        {activity.difficulty}
+                                    </p>
+                                    <p>
+                                        <b>Temporada: </b>
+                                        {activity.season}
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
             {/* <button onClick={() => navigate('/home')}>Back to Home</button> */}
         </div>
     );
-    
 }
