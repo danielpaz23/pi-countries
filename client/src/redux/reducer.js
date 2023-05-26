@@ -1,16 +1,22 @@
-import { ADD_ACT, GET_ACT, GET_COUNTRIES, GET_COUNTRY, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY, SORT_BY_NAME_ASC, SORT_BY_NAME_DESC, SORT_BY_POPULATION_ASC, SORT_BY_POPULATION_DESC } from "./actions";
+import {
+    FILTER_BY_CONTINENT_AND_ACTIVITY,
+    FILTER_BY_ACTIVITY_AND_CONTINENT, SEARCH_COUNTRY_NAME, ADD_ACT, GET_ACT, GET_COUNTRIES, GET_COUNTRY, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY, SORT_BY_NAME_ASC, SORT_BY_NAME_DESC, SORT_BY_POPULATION_ASC, SORT_BY_POPULATION_DESC
+} from "./actions";
 
 const initialState = {
     country: [],
     countries: [],
     activities: [],
     filteredCountries: [],
+    allCountries: [],
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_COUNTRIES:
-            return { ...state, countries: action.payload };
+            return { ...state, countries: action.payload, allCountries: action.payload };
+        case SEARCH_COUNTRY_NAME:
+            return { ...state, country: action.payload };
         case GET_COUNTRY:
             return { ...state, country: action.payload };
         case GET_ACT:
@@ -26,12 +32,42 @@ const rootReducer = (state = initialState, action) => {
             );
             return { ...state, filteredCountries: filteredByContinent };
 
+        // case FILTER_BY_CONTINENT_AND_ACTIVITY:
+        //     return {
+        //         ...state,
+        //         filteredCountries: action.payload,
+        //     };
+        case FILTER_BY_CONTINENT_AND_ACTIVITY:
+            const continent = action.payload.continent;
+            const activity = action.payload.activity;
+            const filteredByContinentAndActivity = state.countries.filter(
+                (country) =>
+                    country.continent === continent &&
+                    country.activities.some((act) => act.name === activity)
+            );
+            return {
+                ...state,
+                filteredCountries: filteredByContinentAndActivity,
+            };
+        case FILTER_BY_ACTIVITY_AND_CONTINENT:
+            const act = action.payload.activity;
+            const cont = action.payload.continent;
+            const filteredByActivityAndContinent = state.countries.filter(
+                (country) =>
+                    country.activities.some((activity) => activity.name === act) &&
+                    country.continent === cont
+            );
+            return {
+                ...state,
+                filteredCountries: filteredByActivityAndContinent,
+            };
 
         case FILTER_BY_ACTIVITY:
-            const filteredByActivity = state.countries.filter((country) =>
-                country.activities.includes(action.payload)
-            );
-            return { ...state, filteredCountries: filteredByActivity };
+            const filterActivity = state.allCountries
+            const filteredByActivity = action.payload === "all" ? filterActivity.filter((act) => act.activities.length > 0) : filterActivity.filter((act) => act.activities && act.activities.map((e) => e.name).includes(action.payload));
+            return { ...state, countries: filteredByActivity };
+
+
         case SORT_BY_NAME_ASC:
             const sortedByNameAsc = state.filteredCountries.slice().sort((a, b) => a.name.localeCompare(b.name));
             return { ...state, filteredCountries: sortedByNameAsc };
