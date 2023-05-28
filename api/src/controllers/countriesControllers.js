@@ -1,20 +1,16 @@
 const { Country, Activity, countryactivity } = require("../db");
-const axios = require("axios")
-const { Op, sequelize } = require('sequelize');
-const { response } = require("express");
-
-
+const { Op} = require('sequelize');
 
 const getAllCountries = async () => {
     const databaseCountry = await Country.findAll();
     return databaseCountry;
 }
+
 const getCountrieById = async (id) => {
     try {
         if (!id || typeof id !== 'string' || id.length !== 3) {
           throw new Error('El ID del país debe ser una cadena de 3 letras.');
         }
-    
         const results = await Country.findOne({
           where: {
             id: id.toUpperCase()
@@ -25,18 +21,15 @@ const getCountrieById = async (id) => {
             through: { attributes: [] }
           }
         });
-    
         if (!results) {
           throw new Error('No se encontró ningún país con el ID especificado.');
         }
-    
         return results;
       } catch (error) {
         console.error(error);
         throw new Error('Error al buscar el país en la base de datos.');
       }
 };
-
 
 const searchCountrieByName = async (name) => {
     const databaseCountries = await Country.findAll({

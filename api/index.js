@@ -21,8 +21,6 @@ const server = require('./src/app.js');
 const axios = require('axios');
 const { conn, Country} = require('./src/db.js');
 
-
-
 async function fetchAndSaveCountries() {
   try {
     const response = await axios.get('https://restcountries.com/v3.1/all');

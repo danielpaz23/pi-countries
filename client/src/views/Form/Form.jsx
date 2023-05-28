@@ -26,6 +26,8 @@ const Form = () => {
 
     const validate = (form) => {
         // validate name
+        // revisar, xq guarda sin nada
+
         if (!form.name || typeof form.name !== "string") {
             setErrors({ ...errors, name: "" });
         } else {
@@ -57,6 +59,9 @@ const Form = () => {
         }
         if (form.season === "")
             setErrors({ ...errors, season: "Temporada vacia" });
+        if(!form.countries){
+
+        }
     };
 
     const changeHandler = (event) => {
@@ -90,8 +95,8 @@ const Form = () => {
             .then(() => {
                 alert("Activity added successfully");
             })
-            .catch((err) => {
-                alert("Error adding activity: " + err);
+            .catch((errors) => {
+                alert("Error adding activity: " + errors);
             });
     };
 
