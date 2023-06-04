@@ -52,8 +52,8 @@ async function fetchAndSaveCountries() {
 }
 // mandar la funcion al controller
 conn.sync({ force: false }).then(() => {
-  fetchAndSaveCountries()
-    .then(() => {
+    fetchAndSaveCountries;
+    
       server.listen(3001, () => {
         console.log('%s listening at 3001');
       });
@@ -61,7 +61,7 @@ conn.sync({ force: false }).then(() => {
     .catch(error => {
       console.error('Ocurrió un error al iniciar el servidor:', error);
     });
-});
+
 
 // // Syncing all the models at once.
 // conn.sync({ force: true }).then(() => {
