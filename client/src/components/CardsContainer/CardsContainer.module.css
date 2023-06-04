@@ -1,8 +1,11 @@
 .container{
     border:1px solid black;
-    display:flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     flex-direction: row;
-    border-radius: 15px;
     flex-wrap: wrap;
     gap:1em;
+  /* background-image: url("https://elmapamundi.top/wp-content/uploads/2022/09/Mapamundi-PNG.jpg"); */
+
+    /* background-color:gainsboro; */
 }

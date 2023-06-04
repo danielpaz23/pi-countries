@@ -6,18 +6,17 @@ export default function Card(props) {
    
     return (
         <div className={style.divCards} >
-                <Link
-                    to={`/countries/${props.id}`}
-                    style={{cursor:"pointer", textDecoration: "none", color: "black" }}
-                >
-                    <h2 className={style.cardh2}>{props.name}</h2>
-                </Link>
+                
             <div className={style.card}>
-                <p>Nombre: {props.name}</p>
-                <p>ID: {props.id}</p>
-                <p>Continente: {props.continents}</p>
                 <img className={style.cardimg} src={props.flags} alt="Bandera del país"></img>
+                <p className={style.p}> {props.continents}</p>
             </div>
+            <Link
+                    to={`/countries/${props.id}`}
+                    style={{textDecoration: "none" }}
+                >
+                    <h2 className={style.links}>{props.name}</h2>
+                </Link>
         </div>
     )
 }

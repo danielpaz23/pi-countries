@@ -3,9 +3,20 @@ const axios = require ('axios');
 
 
 const createActivity = async (name,difficulty, season, countries) => {
-    const newActivity = await Activity.create({ name, difficulty, season });
-    await newActivity.setCountries(countries);
-    return newActivity;
+    if(!name ){
+        return {error:"¡Falta Nombre!"}
+    }else if(!difficulty){
+        return {error:"¡Falta Dificultad!"}
+    }else if(!season){
+        return {error:"¡Falta temporada!"}
+    }else if(countries.length ===0){
+        return {error:"¡Seleciona un pais!"}
+    }else{
+        console.log("creando")
+        const newActivity = await Activity.create({ name, difficulty, season });
+            await newActivity.setCountries(countries);
+            return newActivity;
+    }
 }
 const getAllActivities = async () => {
     const databaseActivities = await Activity.findAll({

@@ -1,19 +1,24 @@
-const { createActivity, getAllActivities} = require("../controllers/activitiesControllers.js")
+const { createActivity, getAllActivities } = require("../controllers/activitiesControllers.js")
 
 //get de Activities
 const getActivitiesHandlers = async (req, res) => {
-    const results= await getAllActivities();
+    const results = await getAllActivities();
     res.status(200).json(results);
 };
 
 const createActivitiesHandlers = async (req, res) => {
-    const { name, difficulty, season, countries} = req.body;
+    const { name, difficulty, season, countries } = req.body;
+
     try {
-        const newActivity = await createActivity(name, difficulty, season, countries)
-        res.status(201).json(newActivity);
+        if (name || difficulty || season || countries!==[]) {
+            const newActivity = await createActivity(name, difficulty, season, countries)
+            res.status(201).json(newActivity);
+        }
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
+
+
 };
 
 module.exports = {

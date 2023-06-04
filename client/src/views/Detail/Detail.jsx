@@ -16,9 +16,12 @@ export default function Detail() {
     }, [dispatch, idPais]);
 
     return (
-        <div>
-            <div className={style.countrydetail}>
-                <div className={style.countryinfo}>
+        <div className={style.divreset}>
+            <div className={style.boxa}>
+
+            
+            <div className={style.box1}>
+                <div className={style.box2}>
                     {country.id && (
                         <p className={style.countryid}>
                             <b>ID: </b>
@@ -27,13 +30,13 @@ export default function Detail() {
                     )}
                     {country.name && (
                         <p className={style.countryname}>
-                            <b>Nombre: </b>
+                            <b>Name: </b>
                             {country.name}
                         </p>
                     )}
                     {country.continents && (
                         <p>
-                            <b>Continente: </b>
+                            <b>Continent: </b>
                             {country.continents}
                         </p>
                     )}
@@ -47,39 +50,47 @@ export default function Detail() {
                         <p>
                             <b>Area: </b>
                             {country.area}
+                            <b> km2</b>
                         </p>
                     )}
                     {country.population && (
                         <p>
-                            <b>Populacion: </b>
+                            <b>Population: </b>
                             {country.population}
                         </p>
                     )}
                 </div>
-                <img className={style.countryflag} src={country.flags} alt="Country Flag" />
+                <div className={style.box3}>
+                <img className={style.imgn} src={country.flags} alt="Country Flag" />
+                </div>
+            </div>
+            <div className={style.box4}>
                 {country.Activities && country.Activities.length > 0 && (
-                    <div className={style.activities}>
-                        <h3>Actividades:</h3>
-                        <ul>
+                    <div className={style.box5}>
+                        <h3>Activities:</h3>
+                        <ul className={style.ul}>
                             {country.Activities.map((activity) => (
-                                <li key={activity.id}>
+                                <li className={style.li} key={activity.id}>
+                                    <div className={style.box6}>
                                     <p>
-                                        <b>Nombre: </b>
+                                        <b>Name: </b>
                                         {activity.name}
                                     </p>
                                     <p>
-                                        <b>Dificultad: </b>
+                                        <b>Difficulty: </b>
                                         {activity.difficulty}
                                     </p>
                                     <p>
-                                        <b>Temporada: </b>
+                                        <b>Season: </b>
                                         {activity.season}
                                     </p>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
                     </div>
                 )}
+            </div>
             </div>
         </div>
     );

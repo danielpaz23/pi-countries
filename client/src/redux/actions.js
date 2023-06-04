@@ -15,8 +15,8 @@ export const getAct = () => {
     try {
         return async function (dispatch) {
             const apiData = await axios.get(`http://localhost:3001/activities/`);
-            const activity = apiData.data;
-            dispatch({ type: GET_ACT, payload: activity })
+            const activities = apiData.data;
+            dispatch({ type: GET_ACT, payload: activities })
         }
     } catch (error) {
         return ({ error: error.message })
@@ -85,9 +85,17 @@ export const filterByActivity = (activity) => {
                 const activityNames = countryActivities.map((activity) => activity.name);
                 return { ...country, activities: activityNames };
             });
-            const filteredCountries = countries.filter((country) =>
-                country.activities.includes(activity)
-            );
+            let filteredCountries;
+            if (activity === "") {
+                filteredCountries = countries;
+            } else {
+                filteredCountries = countries.filter((country) =>
+                    country.activities.includes(activity)
+                );
+            }
+            // const filteredCountries = countries.filter((country) =>
+            //     country.activities.includes(activity)
+            // );
             dispatch({
                 type: FILTER_BY_ACTIVITY,
                 payload: filteredCountries,

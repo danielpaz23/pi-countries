@@ -32,7 +32,7 @@ async function fetchAndSaveCountries() {
         name: country.name.common,
         id: country.cca3,
         flags: country.flags ? country.flags.svg : null,
-        continents: country.region,
+        continents: country.continents[0],
         capital: country.capital ? country.capital[0] : 'N/A',
         area: country.area,
         population: country.population
