@@ -51,8 +51,8 @@ async function fetchAndSaveCountries() {
   }
 }
 // mandar la funcion al controller
-conn.sync({ force: false }).then(() => {
-    fetchAndSaveCountries;
+conn.sync({ force: false}).then(() => {
+    // fetchAndSaveCountries();
     
       server.listen(3001, () => {
         console.log('%s listening at 3001');
