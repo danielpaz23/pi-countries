@@ -2,7 +2,6 @@ import axios from "axios";
 export const GET_ACT = "GET_ACT"
 export const GET_COUNTRY = "GET_COUNTRY"
 export const GET_COUNTRIES = "GET_COUNTRIES"
-export const ADD_ACT = "ADD_ACT";
 export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT"
 export const FILTER_BY_ACTIVITY = "FILTER_BY_ACTIVITY"
 export const SORT_BY_NAME_ASC = "SORT_BY_NAME_ASC"
@@ -10,7 +9,6 @@ export const SORT_BY_NAME_DESC = "SORT_BY_NAME_DESC"
 export const SORT_BY_POPULATION_ASC = "SORT_BY_POPULATION_ASC"
 export const SORT_BY_POPULATION_DESC = "SORT_BY_POPULATION_DESC"
 export const SEARCH_COUNTRY_NAME = "SEARCH_COUNTRY_NAME"
-
 export const getAct = () => {
     try {
         return async function (dispatch) {
@@ -55,19 +53,6 @@ export const getCountries = () => {
         return { error: error.message };
     }
 };
-export function addAct(name, difficulty, season, countries) {
-    try {
-        return async function (dispatch) {
-            await axios.post(`activities/`, { name, difficulty, season, countries });
-            return dispatch({
-                type: ADD_ACT,
-                payload: { name, difficulty, season, countries },
-            });
-        };
-    } catch (error) {
-        return ({ error: error.message });
-    }
-}
 export const filterByContinent = (continent) => ({
     type: FILTER_BY_CONTINENT,
     payload: continent,

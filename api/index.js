@@ -25,7 +25,6 @@ async function fetchAndSaveCountries() {
   try {
     const response = await axios.get('https://restcountries.com/v3.1/all');
     const countries = response.data;
-
     // Filtrar y transformar los datos de la API
     const filteredCountries = countries.map(country => {
       return {
@@ -38,13 +37,10 @@ async function fetchAndSaveCountries() {
         population: country.population
       };
     });
-
     // Sincronizar el modelo Country con la base de datos
     await Country.sync();
-
     // Guardar los países en la base de datos
     await Country.bulkCreate(filteredCountries);
-
     console.log('Los países se han guardado correctamente en la base de datos.');
   } catch (error) {
     console.error('Ocurrió un error al obtener o guardar los países:', error);
@@ -61,12 +57,3 @@ conn.sync({ force: false}).then(() => {
     .catch(error => {
       console.error('Ocurrió un error al iniciar el servidor:', error);
     });
-
-
-// // Syncing all the models at once.
-// conn.sync({ force: true }).then(() => {
-  
-//   server.listen(3001, () => {
-//     console.log('%s listening at 3001'); // eslint-disable-line no-console
-//   });
-// });

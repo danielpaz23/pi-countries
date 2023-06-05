@@ -1,5 +1,4 @@
 .divCards{
-  /* display: grid; */
   background-color:darkgrey;
   border-radius: 10px;
   margin: 5px 5px;
@@ -19,7 +18,7 @@
   border-radius: 8px;
   padding: 0px 3px;
   margin: 10px;
-  /* cursor: pointer; */
+  cursor: pointer;
 }
 .links:hover{
   color: hotpink;
@@ -34,22 +33,12 @@
   border-radius: 0px 20px 20px 0px;
   border: 2px solid darkgrey;
   margin-top: 3px;
-  
 }
 .p{
   text-decoration: none;
   font-weight:bolder;
   font-size: 18px;
   padding-left: 20px;
-
 }
 
-
-
-/* .card{
-    border:1px solid black;
-    width: fit-content;
-    height: fit-content;
-    border-radius: 10px;
-}*/
 

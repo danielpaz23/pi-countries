@@ -6,9 +6,7 @@ import axios from "axios";
 const Form = () => {
     const dispatch = useDispatch();
     const activities = useSelector((state) => state.activities);
-    console.log(activities)
     const countries = useSelector((state) => state.countries);
-    console.log(countries)
 
     const [form, setForm] = useState({
         name: "",
@@ -27,19 +25,16 @@ const Form = () => {
         dispatch(getCountries());
         dispatch(getAct())
     }, [dispatch]);
+
     const changeHandler = (event) => {
         const property = event.target.name;
         const value = event.target.value;
         const updatedForm = { ...form, [property]: value };
-
-        // validate(updatedForm);
         setForm(updatedForm);
         setErrors(validate(updatedForm))
-
     };
 
     const validate = (form) => {
-
         let errores = {}
         if (!form.name) {
             errores.name = "Enter a name!";
@@ -70,6 +65,7 @@ const Form = () => {
         }
         return errores
     }
+
     const countrySelectionHandler = (event) => {
         const selectedOptions = Array.from(event.target.selectedOptions);
         const selectedCountries = selectedOptions.map((option) => option.value);
@@ -113,7 +109,6 @@ const Form = () => {
         })
     };
     return (
-
         <form onSubmit={submitHandler} >
             <div className={style.divreset}>
                 <h2>Create Activity</h2>
@@ -130,7 +125,7 @@ const Form = () => {
                             />
                         </div>
                         <div className={style.box4e}>
-                            {errors.name && <label className={style.error}>{errors.name}</label>}
+                            {errors.name && <span className={style.error}>{errors.name}</span>}
                         </div>
                     </div>
                     <div className={style.box2}>
@@ -159,7 +154,7 @@ const Form = () => {
                             </div>
                         </div>
                         <div className={style.box2e}>
-                            {errors.difficulty && <label className={style.error}>{errors.difficulty}</label>}
+                            {errors.difficulty && <span className={style.error}>{errors.difficulty}</span>}
                         </div>
                     </div>
                     <div className={style.box3}>
@@ -190,7 +185,7 @@ const Form = () => {
                             </div>
                         </div>
                         <div className={style.box3e}>
-                            {errors.season && <label className={style.error}>{errors.season}</label>}
+                            {errors.season && <span className={style.error}>{errors.season}</span>}
                         </div>
                     </div>
                 </div>
@@ -199,7 +194,7 @@ const Form = () => {
                         <button className={style.links} type="submit">SUBMIT</button>
                     </div>
                     <div className={style.box7}>
-                        <label>Select a countries:{errors.countries && <label className={style.error}>{errors.countries}</label>}</label>
+                        <label>Select a countries:{errors.countries && <span className={style.error}>{errors.countries}</span>}</label>
                         <select
                             className={style.select}
                             name="countries"

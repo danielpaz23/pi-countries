@@ -1,10 +1,7 @@
-
 import Card from "../Card/Card";
 import style from "./CardsContainer.module.css";
 
 export default function CardsContainer({ countries}) {
-
-  
   return (
     <div className={style.container}>
       {countries.map((country) => (
@@ -14,7 +11,6 @@ export default function CardsContainer({ countries}) {
           flags={country.flags}
           name={country.name}
           continents={country.continents}
-          onClose={() => {}} // Aquí puedes pasar una función onClose si es necesario
         />
       ))}
     </div>

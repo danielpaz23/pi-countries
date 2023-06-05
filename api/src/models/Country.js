@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
     },
     capital: {
       type: DataTypes.STRING,
-      allowNull: true, // Establecer valor predeterminado
+      allowNull: true,
     },
     area: {
       type: DataTypes.INTEGER,

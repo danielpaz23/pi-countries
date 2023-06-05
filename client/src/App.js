@@ -5,9 +5,7 @@ import NavBar from "./components/NavBar/NavBar";
 import axios from 'axios';
 axios.defaults.baseURL = "https://pi-countries-production-47ab.up.railway.app/";
 function App() {
-
   const location = useLocation();
-
   return (
     <div className="App">
       {location.pathname !== "/" && <NavBar/>}
@@ -18,6 +16,4 @@ function App() {
     </div>
   );
 }
-
-
 export default App;

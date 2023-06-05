@@ -12,7 +12,6 @@ const createActivity = async (name,difficulty, season, countries) => {
     }else if(countries.length ===0){
         return {error:"¡Seleciona un pais!"}
     }else{
-        console.log("creando")
         const newActivity = await Activity.create({ name, difficulty, season });
             await newActivity.setCountries(countries);
             return newActivity;

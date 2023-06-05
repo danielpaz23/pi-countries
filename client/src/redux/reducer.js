@@ -2,7 +2,6 @@ import {
     GET_ACT,
     GET_COUNTRY,
     GET_COUNTRIES,
-    ADD_ACT,
     FILTER_BY_CONTINENT,
     FILTER_BY_ACTIVITY,
     SORT_BY_NAME_ASC,
@@ -28,9 +27,6 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, country: action.payload };
         case GET_COUNTRIES:
             return { ...state, countries: action.payload, allCountries: action.payload };
-        case ADD_ACT:
-            const addActivities = [...state.activities, action.payload];
-            return { ...state, activities: [...addActivities] };
         case FILTER_BY_CONTINENT:
             const filteredByContinent = state.countries.filter(
                 (country) =>

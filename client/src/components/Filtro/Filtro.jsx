@@ -22,7 +22,6 @@ const Filtro = () => {
   const [sortOrder, setSortOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [name, setName] = useState("");
-
   const allCountries = useSelector((state) => state.countries);
   const filteredCountries = useSelector((state) =>
     state.filteredCountries.length > 0 ? state.filteredCountries : allCountries
@@ -55,7 +54,7 @@ const Filtro = () => {
     setName("");
     setActivityFilter("");
     setSortOrder("");
-    setCurrentPage(1); // Restablecer el estado para no mostrar todos los países después de filtrar por continente
+    setCurrentPage(1);
   };
 
   const handleActivityFilter = (activity) => {
@@ -90,33 +89,6 @@ const Filtro = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  // // filtrado de paises con actividades
-  // const filteredCountriesByContinent = continentFilter
-  //   ? filteredCountries.filter((country) => country.continents.includes(continentFilter))
-  //   : filteredCountries;
-
-  // const filteredCountriesByActivity = activityFilter
-  //   ? filteredCountriesByContinent.filter((country) => country.activities.includes(activityFilter))
-  //   : filteredCountriesByContinent;
-
-  // ordenamiento de paises con actividades
-  // const sortedCountries = (() => {
-  //   switch (sortOrder) {
-  //     case "nameAsc":
-  //       return filteredCountriesByActivity.slice().sort((a, b) => a.name.localeCompare(b.name));
-  //     case "nameDesc":
-  //       return filteredCountriesByActivity.slice().sort((a, b) => b.name.localeCompare(a.name));
-  //     case "populationAsc":
-  //       return filteredCountriesByActivity.slice().sort((a, b) => a.population - b.population);
-  //     case "populationDesc":
-  //       return filteredCountriesByActivity.slice().sort((a, b) => b.population - a.population);
-  //     default:
-  //       return filteredCountriesByActivity;
-  //   }
-  // })();
-
-  //  paginado
   const countriesPerPage = 10;
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
@@ -203,7 +175,6 @@ const Filtro = () => {
           <div className={style.listas}>
             <select
               className={style.classic}
-              // class="filter"
               onChange={(e) => handleActivityFilter(e.target.value)}
               value={activityFilter}
             >
