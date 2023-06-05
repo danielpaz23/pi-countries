@@ -8,6 +8,9 @@
   background-attachment: fixed;
 }
 .error{
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 25px;
   color:red;
 }
 text{
